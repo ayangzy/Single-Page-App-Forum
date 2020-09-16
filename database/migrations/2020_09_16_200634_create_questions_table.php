@@ -20,9 +20,8 @@ class CreateQuestionsTable extends Migration
             $table->text('body');
 
             $table->integer('user_id')->unsigned();
-            $table->integer('category_id')->unsigned();
+            $table->bigInteger('category_id')->unsigned();
 
-            $table->foreign('category_id')->references('id')->on('categories')->Ondelete('cascade');
             $table->timestamps();
         });
     }
