@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
@@ -26,6 +27,14 @@ Route::prefix('v1')->group(static function(){
         Route::get('/{question}', [QuestionController::class, 'show'])->name('show');
         Route::patch('/{question}', [QuestionController::class, 'update'])->name('update');
         Route::delete('/{question}', [QuestionController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('categories')->name('category.')->group(static function(){
+        Route::get('/', [CategoryController::class, 'index'])->name('index');
+        Route::post('/', [CategoryController::class, 'store'])->name('store');
+        Route::get('/{category}', [CategoryController::class, 'show'])->name('show');
+        Route::patch('/{category}', [CategoryController::class, 'update'])->name('update');
+        Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
     });
 
 
