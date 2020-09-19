@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\ReplyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,14 @@ Route::prefix('v1')->group(static function(){
         Route::get('/{category}', [CategoryController::class, 'show'])->name('show');
         Route::patch('/{category}', [CategoryController::class, 'update'])->name('update');
         Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::name('reply.')->group(static function(){
+        Route::get('/question/{question}/replies', [ReplyController::class, 'index'])->name('index');
+        Route::post('/question/{question}/reply', [ReplyController::class, 'store'])->name('store');
+        Route::get('/question/{question}/reply/{reply}', [ReplyController::class, 'show'])->name('show');
+        Route::patch('/question/{question}/reply/{reply}', [ReplyController::class, 'update'])->name('update');
+        Route::delete('/question/{question}/reply/{reply}', [ReplyController::class, 'destroy'])->name('destroy');
     });
 
 

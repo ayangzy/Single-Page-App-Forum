@@ -9,9 +9,11 @@ class Reply extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function question()
     {
-        return $this-belongsTo(Question::class);
+        return $this->belongsTo(Question::class);
     }
 
     public function likes()
