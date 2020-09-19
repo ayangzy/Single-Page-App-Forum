@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LikeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
@@ -45,6 +46,12 @@ Route::prefix('v1')->group(static function(){
         Route::patch('/question/{question}/reply/{reply}', [ReplyController::class, 'update'])->name('update');
         Route::delete('/question/{question}/reply/{reply}', [ReplyController::class, 'destroy'])->name('destroy');
     });
+
+    Route::name('like.')->group(static function(){
+        Route::post('/like/{reply}', [LikeController::class, 'likeIt'])->name('likeIt');
+        Route::delete('/like/{reply}', [LikeController::class, 'unLikeIt'])->name('unLikeIt');
+    });
+
 
 
 });
