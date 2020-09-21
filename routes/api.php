@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LikeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\user\UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +26,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(static function(){
+
+    Route::prefix('auth')->name('auth.')->group(static function(){
+        Route::post('/register', [RegisterController::class, 'Register'])->name('Register');
+        Route::post('/login', [LoginController::class, 'login'])->name('login');
+    });
+
+    Route::middleware('auth:sanctum')->group(static function () {
+        Route::prefix('users')->name('user.')->group(static function(){
+            Route::get('/userProfile', [UserProfileController::class, 'userProfile'])->name('userProfile');
+            Route::post('/logOut', [UserProfileController::class, 'logOut'])->name('logOut');
+        });
+
+    });
     Route::prefix('questions')->name('question.')->group(static function(){
         Route::get('/', [QuestionController::class, 'index'])->name('index');
         Route::post('/', [QuestionController::class, 'store'])->name('store');
