@@ -7,12 +7,20 @@
       <v-toolbar-title>miForum</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn text>Forum</v-btn>
-        <v-btn text>Category</v-btn>
-        <v-btn text>Create Question</v-btn>
-        <v-btn text>Sign In</v-btn>
-      </v-toolbar-items>
+      <div class="hidden-sm-and-down">
+        <router-link to="/forum">
+          <v-btn text>Forum</v-btn>
+        </router-link>
+        <router-link to="/category">
+          <v-btn text>Category</v-btn>
+        </router-link>
+        <router-link to="/question">
+          <v-btn text>Create Question</v-btn>
+        </router-link>
+        <router-link to="/sign-in">
+          <v-btn text>Sign In</v-btn>
+        </router-link>
+      </div>
     </v-toolbar>
   </v-card>
 </template>

@@ -17,14 +17,12 @@ class LoginController extends BaseController
         $credentials = $request->only('email', 'password');
 
         if (!Auth::attempt($credentials)) {
-            return $this->errorResponse('Provided credentials is not valid', Response::HTTP_BAD_REQUEST);
+            return $this->errorResponse('Provided credentials is not valid', Response::HTTP_UNAUTHORIZED);
         }
 
         $user = User::where('email', $request->get('email'))->first();
         $token = $user->createToken('singlepageapplication');
         $user->token = $token->plainTextToken;
         return $this->successResponse('Successfully logged in', new LoginResource($user));
-
-
     }
 }
